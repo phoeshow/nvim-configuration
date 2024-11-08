@@ -34,8 +34,8 @@ return {
       },
 
       -- auto complete
-      -- "hrsh7th/cmp-nvim-lsp",
-      "saghen/blink.cmp",
+      "hrsh7th/cmp-nvim-lsp",
+      -- "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -105,8 +105,8 @@ return {
       end
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-      capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      -- capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
       local servers = {
         lua_ls = {
@@ -130,6 +130,7 @@ return {
         "stylua", -- Used to format Lua code
         "prettierd", -- Used to format js/ts
         "eslint_d", -- Used to lint js/ts
+        "markdownlint", -- Markdown lint
       })
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,

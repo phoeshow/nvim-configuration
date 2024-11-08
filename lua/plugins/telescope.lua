@@ -7,12 +7,22 @@ return {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
     },
+    { "nvim-telescope/telescope-ui-select.nvim" },
   },
   config = function()
-    local telescope = require("telescope")
-
-    telescope.setup({})
-    telescope.load_extension("fzf")
+    require("telescope").setup({
+      defaults = {
+        borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      },
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown(),
+        },
+      },
+    })
+    -- Enable Telescope extensions if they are installed
+    pcall(require("telescope").load_extension, "fzf")
+    pcall(require("telescope").load_extension, "ui-select")
 
     local builtin = require("telescope.builtin")
     local map = vim.keymap.set
@@ -23,9 +33,14 @@ return {
     map("n", "<leader>fb", builtin.buffers, { desc = "Find open buffers" })
     map("n", "<leader>fk", builtin.keymaps, { desc = "Find keymaps" })
 
+    map("n", "<leader>fn", function()
+      builtin.find_files({
+        cwd = vim.fn.stdpath("config"),
+      })
+    end, { desc = "Find Neovim config files" })
+
     map("n", "<leader>/", function()
       builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-        winblend = 10,
         previewer = false,
       }))
     end, { desc = "[/] Fuzzily search in current buffer" })

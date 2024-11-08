@@ -1,6 +1,5 @@
 return {
   "hrsh7th/nvim-cmp",
-  enabled = false,
   event = "InsertEnter",
   dependencies = {
     {
@@ -22,6 +21,10 @@ return {
     --  into multiple repos for maintenance purposes.
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-cmdline",
+    -- signature help soruce
+    "hrsh7th/cmp-nvim-lsp-signature-help",
   },
   config = function()
     local cmp = require("cmp")
@@ -61,16 +64,35 @@ return {
           end
         end, { "i", "s" }),
       }),
-      sources = {
-        {
-          name = "lazydev",
-          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-          group_index = 0,
-        },
+      sources = cmp.config.sources({
+        { name = "lazydev" },
+      }, {
         { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "path" },
+      }, {
+        { name = "buffer" },
+      }),
+    })
+
+    -- `/` cmdline setup.
+    cmp.setup.cmdline("/", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = "buffer" },
       },
+    })
+
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        { name = "cmdline" },
+      }),
+      matching = { disallow_symbol_nonprefix_matching = false },
     })
   end,
 }
