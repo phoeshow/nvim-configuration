@@ -56,19 +56,4 @@ return {
       })
     end,
   },
-  {
-    "echasnovski/mini.surround",
-    version = "*",
-    opts = {
-      mappings = {
-        add = "ysa",
-        delete = "ysd",
-        find = "",
-        find_left = "",
-        highlight = "ysh",
-        replace = "ysr",
-        update_n_lines = "",
-      },
-    },
-  },
 }

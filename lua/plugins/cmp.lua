@@ -25,11 +25,15 @@ return {
     "hrsh7th/cmp-cmdline",
     -- signature help soruce
     "hrsh7th/cmp-nvim-lsp-signature-help",
+
+    -- add pictograms to cmp-menu
+    "onsails/lspkind.nvim",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     luasnip.config.setup({})
+    local lspkind = require("lspkind")
 
     cmp.setup({
       snippet = {
@@ -74,6 +78,18 @@ return {
       }, {
         { name = "buffer" },
       }),
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol_text",
+          menu = {
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            nvim_lua = "[Lua]",
+            latex_symbols = "[Latex]",
+          },
+        }),
+      },
     })
 
     -- `/` cmdline setup.

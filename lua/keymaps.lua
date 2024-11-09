@@ -6,10 +6,10 @@ map("n", "<leader>wv", "<CMD>vsplit<CR>", { desc = "Split window vertically" })
 map("n", "<leader>wd", "<c-w>c", { desc = "Delete window" })
 
 -- Move to window useing the <ctrl>hjkl keys
-map("n", "<C-h>", "<c-w>h", { desc = "Go to Left Window" })
-map("n", "<C-j>", "<c-w>j", { desc = "Go to Lower Window" })
-map("n", "<C-k>", "<c-w>k", { desc = "Go to Upper Window" })
-map("n", "<C-l>", "<c-w>l", { desc = "Go to Right Window" })
+map({ "n", "t" }, "<C-h>", "<CMD>NavigatorLeft<CR>", { desc = "Go to Left Window" })
+map({ "n", "t" }, "<C-l>", "<CMD>NavigatorRight<CR>", { desc = "Go to Lower Window" })
+map({ "n", "t" }, "<C-k>", "<CMD>NavigatorUp<CR>", { desc = "Go to Upper Window" })
+map({ "n", "t" }, "<C-j>", "<CMD>NavigatorDown<CR>", { desc = "Go to Right Window" })
 
 -- Resize window useing <ctrl> arrow keys
 map("n", "<C-Up>", "<CMD>resize +2<CR>", { desc = "Increase Window Height" })
