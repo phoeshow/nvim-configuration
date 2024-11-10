@@ -33,3 +33,8 @@ map("n", "<ESC>", "<CMD>nohlsearch<CR>")
 -- Increase/Decrease number useing '+/-' keys
 map("n", "+", "<C-a>", { desc = "Increase number" })
 map("n", "-", "<C-x>", { desc = "Decrease number" })
+
+map("n", "<leader>th", function()
+  local is_enabled = vim.lsp.inlay_hint.is_enabled()
+  vim.lsp.inlay_hint.enable(not is_enabled)
+end, { desc = "Toggle: LSP Inlay Hint" })
