@@ -22,17 +22,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      {
-        "j-hui/fidget.nvim",
-        opts = {
-          notification = {
-            window = {
-              winblend = 0,
-            },
-          },
-        },
-      },
-
       -- auto complete
       "hrsh7th/cmp-nvim-lsp",
       -- "saghen/blink.cmp",
