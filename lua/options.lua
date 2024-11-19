@@ -67,3 +67,7 @@ vim.opt.laststatus = 3
 vim.opt.updatetime = 250
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
+
+-- encoding
+vim.opt.encoding = "utf-8"
+vim.opt.fileencodings = "ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1"

@@ -28,7 +28,7 @@ return {
   {
     "echasnovski/mini.indentscope",
     version = "*",
-    events = { "BufNewFile", "BufRead" },
+    event = { "BufNewFile", "BufRead" },
     opts = {
       options = {
         try_as_border = true,
