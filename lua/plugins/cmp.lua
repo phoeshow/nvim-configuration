@@ -23,8 +23,6 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-cmdline",
-    -- signature help soruce
-    "hrsh7th/cmp-nvim-lsp-signature-help",
 
     -- add pictograms to cmp-menu
     "onsails/lspkind.nvim",
@@ -72,7 +70,6 @@ return {
         { name = "lazydev" },
       }, {
         { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "path" },
       }, {

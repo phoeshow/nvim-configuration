@@ -2,7 +2,9 @@ local map = vim.keymap.set
 
 -- Split window
 map("n", "<leader>wh", "<CMD>split<CR>", { desc = "Split window horizontally" })
+map("n", "<leader>w-", "<CMD>split<CR>", { desc = "Split window horizontally" })
 map("n", "<leader>wv", "<CMD>vsplit<CR>", { desc = "Split window vertically" })
+map("n", "<leader>w\\", "<CMD>vsplit<CR>", { desc = "Split window vertically" })
 map("n", "<leader>wd", "<c-w>c", { desc = "Delete window" })
 
 -- Move to window useing the <ctrl>hjkl keys
@@ -18,10 +20,12 @@ map("n", "<C-Left>", "<CMD>vertical resize -2<CR>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<CMD>vertical resize +2<CR>", { desc = "Increase Window Width" })
 
 -- Move lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", noremap = true, silent = true })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", noremap = true, silent = true })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down", noremap = true, silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up", noremap = true, silent = true })
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down", noremap = true, silent = true })
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up", noremap = true, silent = true })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
@@ -33,8 +37,3 @@ map("n", "<ESC>", "<CMD>nohlsearch<CR>")
 -- Increase/Decrease number useing '+/-' keys
 map("n", "+", "<C-a>", { desc = "Increase number" })
 map("n", "-", "<C-x>", { desc = "Decrease number" })
-
-map("n", "<leader>th", function()
-  local is_enabled = vim.lsp.inlay_hint.is_enabled()
-  vim.lsp.inlay_hint.enable(not is_enabled)
-end, { desc = "Toggle: LSP Inlay Hint" })

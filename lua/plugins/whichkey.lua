@@ -9,6 +9,7 @@ return {
       { "<leader>b", group = "Buffers" },
       { "<leader>g", group = "Git" },
       { "<leader>t", group = "Toggle" },
+      { "<leader>u", group = "UI" },
     },
   },
 }

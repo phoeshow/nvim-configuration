@@ -133,14 +133,14 @@ return {
         if mode_map[mode_code] == nil then
           return mode_code
         end
-        return mode_map[mode_code].icon
+        return "" .. mode_map[mode_code].icon .. ""
       end,
       color = function()
         local mode_code = vim.api.nvim_get_mode().mode
         if mode_map[mode_code] == nil then
           return { fg = colors.surface2, bg = colors.base, gui = "bold" }
         end
-        return { fg = colors.base, bg = mode_map[mode_code].color, gui = "bold" }
+        return { fg = mode_map[mode_code].color, gui = "bold" }
       end,
       padding = { left = 1, right = 1 },
     })
