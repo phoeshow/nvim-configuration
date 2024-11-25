@@ -61,7 +61,7 @@ return {
       options = {
         component_separators = "",
         section_separators = { left = "" },
-        globalstatus = true,
+        -- globalstatus = true,
         theme = {
           normal = {
             a = { fg = colors.base, bg = colors.green, gui = "bold" },
@@ -71,7 +71,7 @@ return {
           inactive = {
             a = { fg = colors.text, bg = colors.surface2, gui = "bold" },
             b = { fg = colors.text, bg = colors.surface1 },
-            c = { fg = colors.text, bg = colors.crust },
+            c = { fg = colors.text, bg = colors.mantle },
           },
         },
       },
@@ -94,29 +94,6 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      -- tabline = {
-      --   lualine_a = {
-      --     {
-      --       "buffers",
-      --       symbols = {
-      --         modified = " ●",
-      --         alternate_file = "",
-      --         directory = " ",
-      --       },
-      --     },
-      --   },
-      --   lualine_x = {
-      --     {
-      --       "branch",
-      --       icon = " ",
-      --       color = { fg = colors.mauve, gui = "bold" },
-      --     },
-      --     {
-      --       "diff",
-      --       symbols = { added = " ", modified = " ", removed = " " },
-      --     },
-      --   },
-      -- },
     }
 
     local function ins_left(component)
@@ -235,17 +212,17 @@ return {
     ins_right({
       "branch",
       icon = "",
-      color = { bg = colors.mauve, fg = colors.base, gui = "bold" },
+      color = { fg = colors.mauve, gui = "bold" },
     })
 
     ins_right({
       "diff",
       diff_color = {
-        added = { fg = colors.base, bg = colors.green },
-        modified = { fg = colors.base, bg = colors.yellow },
-        removed = { fg = colors.base, bg = colors.red },
+        added = { fg = colors.green },
+        modified = { fg = colors.yellow },
+        removed = { fg = colors.red },
       },
-      symbols = { added = " ", modified = " ", removed = " " },
+      symbols = { added = " ", modified = " ", removed = " " },
     })
 
     lualine.setup(config)

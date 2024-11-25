@@ -1,5 +1,5 @@
 return {
-  "folke/ts-comments.nvim",
+  "numToStr/Comment.nvim",
   opts = {},
   event = "VeryLazy",
 }

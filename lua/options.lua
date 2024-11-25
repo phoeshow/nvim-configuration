@@ -61,7 +61,7 @@ vim.opt.termguicolors = true
 -- Always display tab line
 vim.opt.showtabline = 2
 -- Display status line at last window
-vim.opt.laststatus = 3
+-- vim.opt.laststatus = 3
 
 -- Decrease update time
 vim.opt.updatetime = 250
