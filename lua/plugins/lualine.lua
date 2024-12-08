@@ -94,6 +94,13 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
+      extensions = {
+        "neo-tree",
+        "mason",
+        "lazy",
+        "symbols-outline",
+        "nvim-dap-ui",
+      },
     }
 
     local function ins_left(component)
