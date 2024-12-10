@@ -10,6 +10,8 @@ return {
       { "<leader>g", group = "Git" },
       { "<leader>t", group = "Toggle" },
       { "<leader>u", group = "UI" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>s", group = "Search" },
     },
   },
 }
