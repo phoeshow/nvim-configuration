@@ -2,7 +2,6 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  ---@type Snacks.Config
   opts = {
     -- your configuration comes here
     -- or leave it empty to use the default settings
@@ -12,6 +11,7 @@ return {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    indent = { enabled = true },
     dashboard = {
       enabled = true,
       preset = {
