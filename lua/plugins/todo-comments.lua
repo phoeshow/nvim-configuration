@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   event = "VeryLazy",
   keys = {
-    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find TODO comments" },
+    { "<leader>ft", "<cmd>TodoFzfLua<cr>", desc = "Find TODO comments" },
   },
   opts = {
     keywords = {

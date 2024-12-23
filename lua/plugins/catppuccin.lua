@@ -13,8 +13,6 @@ return {
           Pmenu = { bg = colors.surface0 },
           StatusLine = { bg = colors.mantle },
           StatusLineNC = { bg = colors.mantle },
-          TabLineFill = { bg = colors.mantle },
-          IblIndent = { fg = colors.surface1 }, -- indent blank line
         }
       end,
       highlight_overrides = {
@@ -27,13 +25,6 @@ return {
       integrations = {
         fidget = true,
         blink_cmp = true,
-        mini = {
-          enabled = true,
-          indentscope_color = "peach",
-        },
-        telescope = {
-          enabled = true,
-        },
       },
     })
 

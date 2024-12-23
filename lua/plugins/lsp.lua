@@ -23,9 +23,22 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
+      {
+        "j-hui/fidget.nvim",
+        opts = {
+          -- options
+          notification = {
+            window = {
+              winblend = 0,
+            },
+          },
+        },
+      },
+
+      "ibhagwan/fzf-lua",
+
       -- auto complete
-      "hrsh7th/cmp-nvim-lsp",
-      -- "saghen/blink.cmp",
+      "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -36,13 +49,17 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("gd", require("telescope.builtin").lsp_definitions, "Goto Definitions")
-          map("gr", require("telescope.builtin").lsp_references, "Goto References")
-          map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementations")
-          map("gt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definitions")
-          map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+          local fzf_lua = require("fzf-lua")
+
+          map("gd", fzf_lua.lsp_definitions, "Goto Definitions")
+          map("gr", fzf_lua.lsp_references, "Goto References")
+          map("gI", fzf_lua.lsp_implementations, "Goto Implementations")
+          map("gt", fzf_lua.lsp_typedefs, "Goto Type Definitions")
+          map("gD", fzf_lua.lsp_declarations, "Goto Declaration")
+          map("<leader>ca", fzf_lua.lsp_code_actions, "Code Action", { "n", "x" })
           map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
+          map("<leader>fd", fzf_lua.diagnostics_document, "Find Diagnostics(Document)")
+          map("<leader>fD", fzf_lua.diagnostics_workspace, "Find Diagnostics(Workspace)")
           map("K", vim.lsp.buf.hover, "Hover")
           map("gK", vim.lsp.buf.signature_help, "Signature Help")
 
@@ -84,9 +101,9 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-      -- local capabilities = require("blink.cmp").get_lsp_capabilities()
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
         lua_ls = {
