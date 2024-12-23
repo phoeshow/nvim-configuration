@@ -13,6 +13,8 @@ return {
           Pmenu = { bg = colors.surface0 },
           StatusLine = { bg = colors.mantle },
           StatusLineNC = { bg = colors.mantle },
+          SnacksIndentScope = { fg = colors.peach },
+          SnacksIndent = { fg = colors.surface0 },
         }
       end,
       highlight_overrides = {

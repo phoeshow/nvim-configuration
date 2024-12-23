@@ -45,5 +45,9 @@ return {
       end,
     },
   },
-  opts = {},
+  opts = {
+    winopts = {
+      border = "single",
+    },
+  },
 }
