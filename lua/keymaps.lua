@@ -32,8 +32,21 @@ map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 -- Clear search highlight
-map("n", "<ESC>", "<CMD>nohlsearch<CR>")
+map("n", "<ESC>", "<CMD>nohlsearch<CR><ESC>")
 
 -- Increase/Decrease number useing '+/-' keys
 map("n", "+", "<C-a>", { desc = "Increase number" })
 map("n", "-", "<C-x>", { desc = "Decrease number" })
+
+-- Better up/down
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { silent = true, expr = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { silent = true, expr = true })
+
+-- Better indent
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- do not copy when type 'x'
+map("n", "x", '"_x', { noremap = true, silent = true })
+-- do not copy when visual paste
+map("v", "p", '"_dP', { noremap = true, silent = true })

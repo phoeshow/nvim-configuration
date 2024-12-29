@@ -12,6 +12,26 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     indent = { enabled = true },
+    scope = {
+      enabled = true,
+      keys = {
+        textobject = {
+          ii = {
+            min_size = 2, -- minimum size of the scope
+            edge = false, -- inner scope
+            cursor = false,
+            treesitter = { blocks = { enabled = false } },
+            desc = "inner scope",
+          },
+          ai = {
+            cursor = false,
+            min_size = 2, -- minimum size of the scope
+            treesitter = { blocks = { enabled = false } },
+            desc = "full scope",
+          },
+        },
+      },
+    },
     dashboard = {
       enabled = true,
       preset = {
