@@ -1,3 +1,7 @@
+local function on_move(data)
+  Snacks.rename.on_rename_file(data.source, data.destination)
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -15,6 +19,14 @@ return {
         handler = function()
           vim.cmd("Neotree close")
         end,
+      },
+      {
+        event = "file_moved",
+        handler = on_move,
+      },
+      {
+        event = "file_renamed",
+        handler = on_move,
       },
     },
   },
