@@ -62,6 +62,9 @@ return {
           map("<leader>fD", fzf_lua.diagnostics_workspace, "Find Diagnostics(Workspace)")
           map("K", vim.lsp.buf.hover, "Hover")
           map("gK", vim.lsp.buf.signature_help, "Signature Help")
+          map("<leader>ce", function()
+            vim.diagnostic.open_float({ source = true })
+          end, "Show diagnostics")
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
