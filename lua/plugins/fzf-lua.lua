@@ -48,6 +48,9 @@ return {
   opts = {
     winopts = {
       border = "single",
+      preview = {
+        border = "single",
+      },
     },
   },
 }
