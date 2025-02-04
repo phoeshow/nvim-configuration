@@ -13,6 +13,8 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     indent = { enabled = true },
+    scroll = { enabled = true },
+    picker = { enabled = true },
     scope = {
       enabled = true,
       keys = {
@@ -54,6 +56,57 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find Files",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Find by Grep",
+    },
+    {
+      "<leader>fh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Find help tags",
+    },
+    {
+      "<leader>fb",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Find open buffers",
+    },
+    {
+
+      "<leader>fk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Find keymaps",
+    },
+    {
+
+      "<leader>fn",
+      function()
+        Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+      end,
+      desc = "Find Neovim Config File",
+    },
+    {
+      '<leader>f"',
+      function()
+        Snacks.picker.registers()
+      end,
+      "Find Registers",
+    },
     {
       "<leader>bd",
       function()

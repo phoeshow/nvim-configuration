@@ -35,7 +35,7 @@ return {
         },
       },
 
-      "ibhagwan/fzf-lua",
+      -- "ibhagwan/fzf-lua",
 
       -- auto complete
       "saghen/blink.cmp",
@@ -49,17 +49,38 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          local fzf_lua = require("fzf-lua")
+          -- local fzf_lua = require("fzf-lua")
 
-          map("gd", fzf_lua.lsp_definitions, "Goto Definitions")
-          map("gr", fzf_lua.lsp_references, "Goto References")
-          map("gI", fzf_lua.lsp_implementations, "Goto Implementations")
-          map("gt", fzf_lua.lsp_typedefs, "Goto Type Definitions")
-          map("gD", fzf_lua.lsp_declarations, "Goto Declaration")
-          map("<leader>ca", fzf_lua.lsp_code_actions, "Code Action", { "n", "x" })
+          map("gd", function()
+            Snacks.picker.lsp_definitions()
+          end, "Goto Definitions")
+
+          map("gr", function()
+            Snacks.picker.lsp_references()
+          end, "Goto References")
+
+          map("gD", function()
+            Snacks.picker.lsp_declarations()
+          end, "Goto Declaration")
+
+          map("gI", function()
+            Snacks.picker.lsp_implementations()
+          end, "Goto Implementations")
+
+          map("gt", function()
+            Snacks.picker.lsp_type_definitions()
+          end, "Goto Type Definitions")
+
+          map("<leader>ca", vim.lsp.buf.code_action, "Coda Action")
           map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
-          map("<leader>fd", fzf_lua.diagnostics_document, "Find Diagnostics(Document)")
-          map("<leader>fD", fzf_lua.diagnostics_workspace, "Find Diagnostics(Workspace)")
+
+          map("<leader>fd", function()
+            Snacks.picker.diagnostics_buffer()
+          end, "Find Diagnostics(Buffer)")
+          map("<leader>fD", function()
+            Snacks.picker.diagnostics()
+          end, "Find Diagnostics(Workspace)")
+
           map("K", vim.lsp.buf.hover, "Hover")
           map("gK", vim.lsp.buf.signature_help, "Signature Help")
           map("<leader>ce", function()
