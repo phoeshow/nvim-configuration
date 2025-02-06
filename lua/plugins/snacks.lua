@@ -59,28 +59,28 @@ return {
     {
       "<leader>ff",
       function()
-        Snacks.picker.files()
+        require("snacks").picker.files()
       end,
       desc = "Find Files",
     },
     {
       "<leader>fg",
       function()
-        Snacks.picker.grep()
+        require("snacks").picker.grep()
       end,
       desc = "Find by Grep",
     },
     {
       "<leader>fh",
       function()
-        Snacks.picker.help()
+        require("snacks").picker.help()
       end,
       desc = "Find help tags",
     },
     {
       "<leader>fb",
       function()
-        Snacks.picker.buffers()
+        require("snacks").picker.buffers()
       end,
       desc = "Find open buffers",
     },
@@ -88,7 +88,7 @@ return {
 
       "<leader>fk",
       function()
-        Snacks.picker.keymaps()
+        require("snacks").picker.keymaps()
       end,
       desc = "Find keymaps",
     },
@@ -96,49 +96,56 @@ return {
 
       "<leader>fn",
       function()
-        Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+        require("snacks").picker.files({ cwd = vim.fn.stdpath("config") })
       end,
       desc = "Find Neovim Config File",
     },
     {
       '<leader>f"',
       function()
-        Snacks.picker.registers()
+        require("snacks").picker.registers()
       end,
       "Find Registers",
     },
     {
       "<leader>bd",
       function()
-        Snacks.bufdelete()
+        require("snacks").bufdelete()
       end,
       desc = "Delete Buffer",
     },
     {
       "<leader>gg",
       function()
-        Snacks.lazygit()
+        require("snacks").lazygit()
       end,
       desc = "Lazygit",
     },
     {
       "<leader>gb",
       function()
-        Snacks.git.blame_line()
+        require("snacks").git.blame_line()
       end,
       desc = "Git Blame Line",
     },
     {
+      "<leader>fw",
+      function()
+        require("snacks").picker.grep_word()
+      end,
+      desc = "Grep current word",
+    },
+    {
       "<leader>gl",
       function()
-        Snacks.lazygit.log()
+        require("snacks").lazygit.log()
       end,
       desc = "Lazygit Log (cwd)",
     },
     {
       "]]",
       function()
-        Snacks.words.jump(vim.v.count1)
+        require("snacks").words.jump(vim.v.count1)
       end,
       desc = "Next Reference",
       mode = { "n", "t" },
@@ -146,7 +153,7 @@ return {
     {
       "[[",
       function()
-        Snacks.words.jump(-vim.v.count1)
+        require("snacks").words.jump(-vim.v.count1)
       end,
       desc = "Prev Reference",
       mode = { "n", "t" },
@@ -158,20 +165,20 @@ return {
       callback = function()
         -- Setup some globals for debugging (lazy-loaded)
         _G.dd = function(...)
-          Snacks.debug.inspect(...)
+          require("snacks").debug.inspect(...)
         end
         _G.bt = function()
-          Snacks.debug.backtrace()
+          require("snacks").debug.backtrace()
         end
         vim.print = _G.dd -- Override print to use snacks for `:=` command
 
         -- Create some toggle mappings
-        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-        Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
-        Snacks.toggle.inlay_hints():map("<leader>th")
+        require("snacks").toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+        require("snacks").toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+        require("snacks").toggle.diagnostics():map("<leader>ud")
+        require("snacks").toggle.line_number():map("<leader>ul")
+        require("snacks").toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+        require("snacks").toggle.inlay_hints():map("<leader>th")
       end,
     })
   end,

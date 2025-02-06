@@ -52,33 +52,33 @@ return {
           -- local fzf_lua = require("fzf-lua")
 
           map("gd", function()
-            Snacks.picker.lsp_definitions()
+            require("snacks").picker.lsp_definitions()
           end, "Goto Definitions")
 
           map("gr", function()
-            Snacks.picker.lsp_references()
+            require("snacks").picker.lsp_references()
           end, "Goto References")
 
           map("gD", function()
-            Snacks.picker.lsp_declarations()
+            require("snacks").picker.lsp_declarations()
           end, "Goto Declaration")
 
           map("gI", function()
-            Snacks.picker.lsp_implementations()
+            require("snacks").picker.lsp_implementations()
           end, "Goto Implementations")
 
           map("gt", function()
-            Snacks.picker.lsp_type_definitions()
+            require("snacks").picker.lsp_type_definitions()
           end, "Goto Type Definitions")
 
           map("<leader>ca", vim.lsp.buf.code_action, "Coda Action")
           map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
 
           map("<leader>fd", function()
-            Snacks.picker.diagnostics_buffer()
+            require("snacks").picker.diagnostics_buffer()
           end, "Find Diagnostics(Buffer)")
           map("<leader>fD", function()
-            Snacks.picker.diagnostics()
+            require("snacks").picker.diagnostics()
           end, "Find Diagnostics(Workspace)")
 
           map("K", vim.lsp.buf.hover, "Hover")
