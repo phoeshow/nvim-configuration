@@ -5,9 +5,6 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      cmdline = {
-        preset = "default",
-      },
       ["<C-space>"] = {},
       ["<C-s>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-e>"] = { "hide", "cancel", "fallback" },
@@ -21,6 +18,11 @@ return {
 
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+    },
+    cmdline = {
+      keymap = {
+        preset = "default",
+      },
     },
     appearance = {
       use_nvim_cmp_as_default = true,
