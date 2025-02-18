@@ -61,7 +61,7 @@ return {
       options = {
         component_separators = "",
         section_separators = { left = "" },
-        -- globalstatus = true,
+        globalstatus = true,
         theme = {
           normal = {
             a = { fg = colors.base, bg = colors.green, gui = "bold" },
@@ -137,6 +137,7 @@ return {
 
     ins_left({
       "filename",
+      path = 1,
       cond = conditions.buffer_not_empty,
       color = { fg = colors.peach, gui = "bold" },
     })
