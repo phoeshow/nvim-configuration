@@ -1,6 +1,6 @@
 return {
   "kylechui/nvim-surround",
   event = "VeryLazy",
-  version = "*",
+  version = "^3.0.0",
   opts = {},
 }

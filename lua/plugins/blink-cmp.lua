@@ -1,27 +1,12 @@
 return {
   "saghen/blink.cmp",
-  dependencies = "rafamadriz/friendly-snippets",
-  version = "*",
+  dependencies = { "rafamadriz/friendly-snippets" },
+  version = "1.*",
   opts = {
     keymap = {
       preset = "enter",
       ["<C-space>"] = {},
       ["<C-s>"] = { "show", "show_documentation", "hide_documentation" },
-      ["<C-e>"] = { "hide", "cancel", "fallback" },
-      ["<CR>"] = { "accept", "fallback" },
-
-      ["<Tab>"] = { "select_next", "fallback" },
-      ["<S-Tab>"] = { "select_prev", "fallback" },
-
-      ["<C-l>"] = { "snippet_forward", "fallback" },
-      ["<C-h>"] = { "snippet_backward", "fallback" },
-
-      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-    },
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = "mono",
     },
     sources = {
       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
@@ -41,6 +26,9 @@ return {
       },
       documentation = {
         auto_show = true,
+      },
+      ghost_text = {
+        enabled = true,
       },
     },
     signature = { enabled = true },
