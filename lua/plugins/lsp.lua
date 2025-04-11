@@ -174,6 +174,8 @@ return {
 
         vtsls = {},
         rust_analyzer = {},
+
+        tailwindcss = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
