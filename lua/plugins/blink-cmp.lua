@@ -1,7 +1,20 @@
 return {
   "saghen/blink.cmp",
+  event = "VimEnter",
   dependencies = {
-    "rafamadriz/friendly-snippets",
+    {
+      "L3MON4D3/LuaSnip",
+      version = "2.*",
+      build = "make install_jsregexp",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
+      opts = {},
+    },
+    "folke/lazydev.nvim",
     "brenoprata10/nvim-highlight-colors",
   },
   version = "1.*",
@@ -21,6 +34,7 @@ return {
         },
       },
     },
+    snippets = { preset = "luasnip" },
     completion = {
       menu = {
         draw = {
