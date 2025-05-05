@@ -59,8 +59,9 @@ return {
 
     local config = {
       options = {
-        component_separators = "",
+        component_separators = "",
         section_separators = { left = "" },
+        always_show_tabline = true,
         globalstatus = true,
         theme = {
           normal = {
@@ -94,18 +95,34 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      -- tabline = {
-      --   lualine_a = {
-      --     {
-      --       "buffers",
-      --       symbols = {
-      --         modified = " ●", -- Text to show when the buffer is modified
-      --         alternate_file = "", -- Text to show to identify the alternate file
-      --         directory = "", -- Text to show when the buffer is a directory
-      --       },
-      --     },
-      --   },
-      -- },
+      tabline = {
+        lualine_a = {
+          {
+            "buffers",
+            symbols = {
+              modified = " ●", -- Text to show when the buffer is modified
+              alternate_file = "", -- Text to show to identify the alternate file
+              directory = "", -- Text to show when the buffer is a directory
+            },
+          },
+        },
+        lualine_x = {
+          {
+            "branch",
+            icon = "",
+            color = { fg = colors.mauve, gui = "bold" },
+          },
+          {
+            "diff",
+            diff_color = {
+              added = { fg = colors.green },
+              modified = { fg = colors.yellow },
+              removed = { fg = colors.red },
+            },
+            symbols = { added = " ", modified = " ", removed = " " },
+          },
+        },
+      },
       extensions = {
         "neo-tree",
         "mason",
@@ -235,21 +252,21 @@ return {
       color = { fg = colors.rosewater },
     })
 
-    ins_right({
-      "branch",
-      icon = "",
-      color = { fg = colors.mauve, gui = "bold" },
-    })
-
-    ins_right({
-      "diff",
-      diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.yellow },
-        removed = { fg = colors.red },
-      },
-      symbols = { added = " ", modified = " ", removed = " " },
-    })
+    -- ins_right({
+    --   "branch",
+    --   icon = "",
+    --   color = { fg = colors.mauve, gui = "bold" },
+    -- })
+    --
+    -- ins_right({
+    --   "diff",
+    --   diff_color = {
+    --     added = { fg = colors.green },
+    --     modified = { fg = colors.yellow },
+    --     removed = { fg = colors.red },
+    --   },
+    --   symbols = { added = " ", modified = " ", removed = " " },
+    -- })
 
     lualine.setup(config)
   end,
