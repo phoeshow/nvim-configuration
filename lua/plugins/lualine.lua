@@ -66,10 +66,10 @@ return {
           normal = {
             a = { fg = colors.base, bg = colors.green, gui = "bold" },
             b = { fg = colors.text, bg = colors.surface0 },
-            c = { fg = colors.text, bg = colors.base },
+            c = { fg = colors.text, bg = colors.mantle },
           },
           inactive = {
-            a = { fg = colors.text, bg = colors.surface2, gui = "bold" },
+            a = { fg = colors.text, bg = colors.surface0, gui = "bold" },
             b = { fg = colors.text, bg = colors.surface1 },
             c = { fg = colors.text, bg = colors.mantle },
           },
@@ -94,6 +94,18 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
+      -- tabline = {
+      --   lualine_a = {
+      --     {
+      --       "buffers",
+      --       symbols = {
+      --         modified = " ●", -- Text to show when the buffer is modified
+      --         alternate_file = "", -- Text to show to identify the alternate file
+      --         directory = "", -- Text to show when the buffer is a directory
+      --       },
+      --     },
+      --   },
+      -- },
       extensions = {
         "neo-tree",
         "mason",
@@ -129,15 +141,15 @@ return {
       padding = { left = 1, right = 1 },
     })
 
-    ins_left({
-      "filetype",
-      colored = true,
-      icon_only = false,
-    })
+    -- ins_left({
+    --   "filetype",
+    --   colored = true,
+    --   icon_only = true,
+    -- })
 
     ins_left({
       "filename",
-      path = 1,
+      path = 0,
       cond = conditions.buffer_not_empty,
       color = { fg = colors.peach, gui = "bold" },
     })
@@ -176,7 +188,7 @@ return {
       "encoding",
       format = string.upper,
       color = { fg = colors.sapphire, gui = "bold" },
-      cond = conditions.hide_in_width,
+      -- cond = conditions.hide_in_width,
     })
 
     ins_right({
@@ -184,7 +196,13 @@ return {
       fmt = string.upper,
       icons_enabled = false,
       color = { fg = colors.green, gui = "bold" },
-      cond = conditions.hide_in_width,
+      -- cond = conditions.hide_in_width,
+    })
+
+    ins_right({
+      "lsp_status",
+      icon = "",
+      color = { fg = colors.sky },
     })
 
     ins_right({
@@ -209,7 +227,7 @@ return {
     ins_right({
       "location",
       color = { fg = colors.mauve },
-      cond = conditions.hide_in_width,
+      -- cond = conditions.hide_in_width,
     })
 
     ins_right({

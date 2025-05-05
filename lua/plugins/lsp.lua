@@ -23,20 +23,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      {
-        "j-hui/fidget.nvim",
-        opts = {
-          -- options
-          notification = {
-            window = {
-              winblend = 0,
-            },
-          },
-        },
-      },
-
-      -- "ibhagwan/fzf-lua",
-
       -- auto complete
       "saghen/blink.cmp",
     },
@@ -48,8 +34,6 @@ return {
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
-
-          -- local fzf_lua = require("fzf-lua")
 
           map("gd", function()
             require("snacks").picker.lsp_definitions()
@@ -156,8 +140,6 @@ return {
         },
       })
 
-      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {

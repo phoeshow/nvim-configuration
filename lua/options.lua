@@ -48,10 +48,6 @@ vim.opt.tabstop = 2
 vim.opt.wrap = false
 vim.opt.whichwrap = "<,>,[,]"
 
--- textwidth 80
-vim.opt.textwidth = 80
-vim.opt.colorcolumn = '80'
-
 -- Sets how neovim display certain whitespace characters in the editor
 vim.opt.list = true
 

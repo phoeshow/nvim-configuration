@@ -9,12 +9,12 @@ return {
       transparent_background = true,
       custom_highlights = function(colors)
         return {
-          NormalFloat = { bg = colors.mantle },
-          Pmenu = { bg = colors.surface0 },
-          StatusLine = { bg = colors.mantle },
-          StatusLineNC = { bg = colors.mantle },
-          SnacksIndentScope = { fg = colors.peach },
-          SnacksIndent = { fg = colors.surface0 },
+          BlinkCmpDoc = { bg = colors.mantle },
+          BlinkCmpMenu = { bg = colors.surface0 },
+          BlinkCmpSignatureHelp = { bg = colors.surface0 },
+          -- StatusLine = { bg = colors.crust },
+          -- StatusLineNC = { bg = colors.mantle },
+          GitSignsChange = { fg = colors.peach },
         }
       end,
       highlight_overrides = {
@@ -25,8 +25,11 @@ return {
         end,
       },
       integrations = {
-        fidget = true,
         blink_cmp = true,
+        snacks = {
+          enabled = true,
+          indent_scope_color = "peach",
+        },
       },
     })
 
