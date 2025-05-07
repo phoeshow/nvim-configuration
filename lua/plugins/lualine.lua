@@ -59,7 +59,7 @@ return {
 
     local config = {
       options = {
-        component_separators = "",
+        component_separators = "",
         section_separators = { left = "" },
         always_show_tabline = true,
         globalstatus = true,
