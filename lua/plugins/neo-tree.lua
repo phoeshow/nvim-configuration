@@ -10,7 +10,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
-  cmd = "Neotree",
+  lazy = false,
   opts = {
     window = { width = 30 },
     event_handlers = {

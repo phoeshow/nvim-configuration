@@ -19,12 +19,12 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
-      { "williamboman/mason.nvim", opts = {} },
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- auto complete
-      "saghen/blink.cmp",
+      -- "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -140,7 +140,7 @@ return {
         },
       })
 
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      -- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
         lua_ls = {
@@ -158,6 +158,8 @@ return {
         rust_analyzer = {},
 
         tailwindcss = {},
+
+        pyright = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -175,7 +177,7 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             require("lspconfig")[server_name].setup(server)
           end,
         },
