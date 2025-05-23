@@ -24,7 +24,7 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- auto complete
-      -- "saghen/blink.cmp",
+      "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -35,41 +35,25 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("gd", function()
-            require("snacks").picker.lsp_definitions()
-          end, "Goto Definitions")
+          local picker = require("snacks").picker
 
-          map("gr", function()
-            require("snacks").picker.lsp_references()
-          end, "Goto References")
-
-          map("gD", function()
-            require("snacks").picker.lsp_declarations()
-          end, "Goto Declaration")
-
-          map("gI", function()
-            require("snacks").picker.lsp_implementations()
-          end, "Goto Implementations")
-
-          map("gt", function()
-            require("snacks").picker.lsp_type_definitions()
-          end, "Goto Type Definitions")
+          map("gd", picker.lsp_definitions, "Goto Definitions")
+          map("gr", picker.lsp_references, "Goto References")
+          map("gD", picker.lsp_declarations, "Goto Declaration")
+          map("gI", picker.lsp_implementations, "Goto Implementations")
+          map("gt", picker.lsp_type_definitions, "Goto Type Definitions")
 
           map("<leader>ca", vim.lsp.buf.code_action, "Coda Action")
           map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
-
-          map("<leader>fd", function()
-            require("snacks").picker.diagnostics_buffer()
-          end, "Find Diagnostics(Buffer)")
-          map("<leader>fD", function()
-            require("snacks").picker.diagnostics()
-          end, "Find Diagnostics(Workspace)")
-
-          map("K", vim.lsp.buf.hover, "Hover")
-          map("gK", vim.lsp.buf.signature_help, "Signature Help")
           map("<leader>ce", function()
             vim.diagnostic.open_float({ source = true })
           end, "Show diagnostics")
+
+          map("<leader>fd", picker.diagnostics_buffer, "Find Diagnostics(Buffer)")
+          map("<leader>fD", picker.diagnostics, "Find Diagnostics(Workspace)")
+
+          map("K", vim.lsp.buf.hover, "Hover")
+          map("gK", vim.lsp.buf.signature_help, "Signature Help")
 
           local function client_supports_method(client, method, bufnr)
             if vim.fn.has("nvim-0.11") == 1 then
@@ -140,7 +124,7 @@ return {
         },
       })
 
-      -- local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
         lua_ls = {
@@ -169,15 +153,21 @@ return {
         "eslint_d", -- Used to lint js/ts
         "markdownlint", -- Markdown lint
       })
-      require("mason-tool-installer").setup({
-        ensure_installed = ensure_installed,
-      })
+      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
       require("mason-lspconfig").setup({
+        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        automatic_installation = false,
+        automatic_enable = {
+          exclude = {},
+        },
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            -- -- This handles overriding only values explicitly passed
+            -- -- by the server configuration above. Useful when disabling
+            -- -- certain features of an LSP (for example, turning off formatting for ts_ls)
+            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             require("lspconfig")[server_name].setup(server)
           end,
         },

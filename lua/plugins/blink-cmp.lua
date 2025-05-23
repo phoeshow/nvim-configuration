@@ -13,6 +13,9 @@ return {
       ["<C-space>"] = {},
       ["<C-s>"] = { "show", "show_documentation", "hide_documentation" },
     },
+    appearance = {
+      nerd_font_variant = "mono",
+    },
     sources = {
       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       providers = {
@@ -58,14 +61,12 @@ return {
           },
         },
       },
-      documentation = {
-        auto_show = true,
-      },
-      ghost_text = {
-        enabled = true,
-      },
+      accept = { auto_brackets = { enabled = true } },
+      documentation = { auto_show = true },
+      ghost_text = { enabled = true },
     },
     signature = { enabled = true },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
   opts_extend = { "sources.default" },
 }
