@@ -8,6 +8,7 @@ return {
       { "<leader>w", group = "Window" },
       { "<leader>b", group = "Buffers" },
       { "<leader>g", group = "Git" },
+      { "<leader>h", group = "Git Hunk" },
       { "<leader>t", group = "Toggle" },
       { "<leader>u", group = "UI" },
       { "<leader>d", group = "Debug" },

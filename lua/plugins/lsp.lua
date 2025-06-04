@@ -22,9 +22,6 @@ return {
       { "mason-org/mason.nvim", opts = {} },
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-      -- auto complete
-      "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -45,9 +42,6 @@ return {
 
           map("<leader>ca", vim.lsp.buf.code_action, "Coda Action")
           map("<leader>cr", vim.lsp.buf.rename, "Code Rename")
-          map("<leader>ce", function()
-            vim.diagnostic.open_float({ source = true })
-          end, "Show diagnostics")
 
           map("<leader>fd", picker.diagnostics_buffer, "Find Diagnostics(Buffer)")
           map("<leader>fD", picker.diagnostics, "Find Diagnostics(Workspace)")
@@ -55,21 +49,13 @@ return {
           map("K", vim.lsp.buf.hover, "Hover")
           map("gK", vim.lsp.buf.signature_help, "Signature Help")
 
-          local function client_supports_method(client, method, bufnr)
-            if vim.fn.has("nvim-0.11") == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
-          end
-
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup("my-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -91,15 +77,23 @@ return {
               end,
             })
           end
+
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange, event.buf) then
+            local win = vim.api.nvim_get_current_win()
+            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+          end
         end,
       })
 
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config({
+        virtual_lines = {
+          current_line = true,
+        },
         severity_sort = true,
-        float = { border = "single", source = "if_many" },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+        -- float = { border = "single", source = "if_many" },
+        underline = true,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = "󰅚 ",
@@ -108,23 +102,21 @@ return {
             [vim.diagnostic.severity.HINT] = "󰌶 ",
           },
         },
-        virtual_text = {
-          source = "if_many",
-          spacing = 2,
-          format = function(diagnostic)
-            local diagnostic_message = {
-              [vim.diagnostic.severity.ERROR] = diagnostic.message,
-              [vim.diagnostic.severity.WARN] = diagnostic.message,
-              [vim.diagnostic.severity.INFO] = diagnostic.message,
-              [vim.diagnostic.severity.HINT] = diagnostic.message,
-            }
-
-            return diagnostic_message[diagnostic.severity]
-          end,
-        },
+        -- virtual_text = {
+        --   source = "if_many",
+        --   spacing = 2,
+        --   format = function(diagnostic)
+        --     local diagnostic_message = {
+        --       [vim.diagnostic.severity.ERROR] = diagnostic.message,
+        --       [vim.diagnostic.severity.WARN] = diagnostic.message,
+        --       [vim.diagnostic.severity.INFO] = diagnostic.message,
+        --       [vim.diagnostic.severity.HINT] = diagnostic.message,
+        --     }
+        --
+        --     return diagnostic_message[diagnostic.severity]
+        --   end,
+        -- },
       })
-
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local servers = {
         lua_ls = {
@@ -134,44 +126,57 @@ return {
                 callSnippet = "Replace",
               },
               diagnostics = { disable = { "missing-fields" } },
+              hint = {
+                enable = true,
+              },
             },
           },
         },
 
         vtsls = {},
+
         rust_analyzer = {},
 
         tailwindcss = {},
 
         pyright = {},
+
+        jsonls = {
+          settings = {
+            json = {
+              schemas = {
+                { fileMatch = { "*.json", "*.jsonc" }, schema = { allowTrailingCommas = true } },
+              },
+            },
+          },
+        },
+
+        cssls = {},
+
+        html = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "prettierd", -- Used to format js/ts
+        "isort", -- format python
+        "black", -- format python
         "eslint_d", -- Used to lint js/ts
         "markdownlint", -- Markdown lint
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
       require("mason-lspconfig").setup({
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        automatic_enable = {
-          exclude = {},
-        },
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- -- This handles overriding only values explicitly passed
-            -- -- by the server configuration above. Useful when disabling
-            -- -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
+        automatic_enable = vim.tbl_keys(servers or {}),
       })
+
+      for server_name, config in pairs(servers) do
+        vim.lsp.config(server_name, config)
+      end
+
+      -- NOTE: Some servers may require an old setup until they are updated. For the full list refer here: https://github.com/neovim/nvim-lspconfig/issues/3705
+      -- These servers will have to be manually set up with require("lspconfig").server_name.setup{}
     end,
   },
 }

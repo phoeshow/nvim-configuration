@@ -23,6 +23,6 @@ vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("close_window_with_q", { clear = true }),
   pattern = { "help", "checkhealth", "lspinfo" },
   callback = function()
-    vim.keymap.set("n", "q", ":q<cr>")
+    vim.keymap.set("n", "q", ":q<cr>", { desc = "Close window with q", silent = true })
   end,
 })

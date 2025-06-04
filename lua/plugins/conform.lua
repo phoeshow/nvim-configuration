@@ -42,6 +42,12 @@ return {
       javascriptreact = { "prettierd" },
       typescriptreact = { "prettierd" },
       markdown = { "prettierd", "markdownlint" },
+      html = { "prettierd" },
+      yaml = { "prettierd" },
+      css = { "prettierd" },
+      python = { "isort", "black" },
+      json = { "prettierd" },
+      jsonc = { "prettierd" },
     },
   },
 }
