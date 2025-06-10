@@ -12,7 +12,7 @@ return {
           lsp_format = "fallback",
         })
       end,
-      mode = "",
+      mode = "v",
       desc = "Code Format",
     },
   },
