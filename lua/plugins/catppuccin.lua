@@ -9,12 +9,13 @@ return {
       transparent_background = true,
       custom_highlights = function(colors)
         return {
-          BlinkCmpDoc = { bg = colors.mantle },
+          BlinkCmpDoc = { bg = utils.darken(colors.surface0, 0.5, colors.base) },
           BlinkCmpMenu = { bg = colors.surface0 },
           BlinkCmpSignatureHelp = { bg = colors.mantle },
           BlinkCmpSignatureHelpActiveParameter = { bg = colors.surface1, bold = true, italic = true },
           NoicePopup = { bg = colors.mantle },
           CursorLine = { bg = utils.darken(colors.surface1, 0.75, colors.base) },
+          -- NormalFloat = { bg = utils.darken(colors.surface0, 0.5, colors.base) },
         }
       end,
       integrations = {

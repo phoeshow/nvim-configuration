@@ -14,10 +14,7 @@ return {
     words = { enabled = true },
     indent = { enabled = true },
     scroll = { enabled = true },
-    picker = {
-      enabled = true,
-      layout = "ivy",
-    },
+    picker = { enabled = true },
     scope = {
       enabled = true,
       keys = {

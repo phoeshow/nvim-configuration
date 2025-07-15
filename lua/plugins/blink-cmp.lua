@@ -29,8 +29,26 @@ return {
     completion = {
       menu = {
         draw = {
-          -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+          columns = { { "label" }, { "kind_icon", "kind", gap = 1 }, { "source_name" } },
           components = {
+            -- customize source_name
+            source_name = {
+              text = function(ctx)
+                local source = ctx.item.source_name
+                if source == "LSP" then
+                  source = "󰣖 "
+                elseif source == "Path" then
+                  source = " "
+                elseif source == "Snippets" then
+                  source = " "
+                elseif source == "Buffer" then
+                  source = " "
+                elseif source == "Cmdline" then
+                  source = " "
+                end
+                return "[" .. source .. "]"
+              end,
+            },
             -- customize the drawing of kind icons
             kind_icon = {
               text = function(ctx)

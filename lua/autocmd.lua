@@ -21,8 +21,18 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineLeave" }, {
 -- close some window with 'q'
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("close_window_with_q", { clear = true }),
-  pattern = { "help", "checkhealth", "lspinfo" },
-  callback = function()
-    vim.keymap.set("n", "q", ":q<cr>", { desc = "Close window with q", silent = true })
+  pattern = { "help", "checkhealth", "lspinfo", "qf" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set("n", "q", function()
+        vim.cmd("close")
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = "Quit buffer",
+      })
+    end)
   end,
 })

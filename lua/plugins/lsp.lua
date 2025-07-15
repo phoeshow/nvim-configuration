@@ -46,8 +46,12 @@ return {
           map("<leader>fd", picker.diagnostics_buffer, "Find Diagnostics(Buffer)")
           map("<leader>fD", picker.diagnostics, "Find Diagnostics(Workspace)")
 
-          map("K", vim.lsp.buf.hover, "Hover")
-          map("gK", vim.lsp.buf.signature_help, "Signature Help")
+          map("K", function()
+            vim.lsp.buf.hover({ border = "single" })
+          end, "LSP: Hover")
+          map("<leader>ce", function()
+            vim.diagnostic.open_float({ border = "single" })
+          end, "Show Diagnostic detail")
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -88,11 +92,11 @@ return {
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config({
-        virtual_lines = {
-          current_line = true,
-        },
+        -- virtual_lines = {
+        --   current_line = true,
+        -- },
         severity_sort = true,
-        -- float = { border = "single", source = "if_many" },
+        float = { border = "single", source = "if_many" },
         underline = true,
         signs = {
           text = {
@@ -102,20 +106,10 @@ return {
             [vim.diagnostic.severity.HINT] = "󰌶 ",
           },
         },
-        -- virtual_text = {
-        --   source = "if_many",
-        --   spacing = 2,
-        --   format = function(diagnostic)
-        --     local diagnostic_message = {
-        --       [vim.diagnostic.severity.ERROR] = diagnostic.message,
-        --       [vim.diagnostic.severity.WARN] = diagnostic.message,
-        --       [vim.diagnostic.severity.INFO] = diagnostic.message,
-        --       [vim.diagnostic.severity.HINT] = diagnostic.message,
-        --     }
-        --
-        --     return diagnostic_message[diagnostic.severity]
-        --   end,
-        -- },
+        virtual_text = {
+          source = "if_many",
+          spacing = 2,
+        },
       })
 
       local servers = {
