@@ -1,5 +1,5 @@
 local function on_move(data)
-  require("snacks").rename.on_rename_file(data.source, data.destination)
+  Snacks.rename.on_rename_file(data.source, data.destination)
 end
 
 return {

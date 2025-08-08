@@ -9,6 +9,7 @@ return {
         -- See the configuration section for more details
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
       },
     },
   },
@@ -32,7 +33,7 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          local picker = require("snacks").picker
+          local picker = Snacks.picker
 
           map("gd", picker.lsp_definitions, "Goto Definitions")
           map("gr", picker.lsp_references, "Goto References")

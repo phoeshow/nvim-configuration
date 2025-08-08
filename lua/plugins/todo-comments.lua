@@ -6,7 +6,7 @@ return {
     {
       "<leader>ft",
       function()
-        require("snacks").picker.todo_comments()
+        Snacks.picker.todo_comments()
       end,
       desc = "Find TODO comments",
     },
