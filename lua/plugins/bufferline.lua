@@ -31,7 +31,8 @@ return {
         },
         show_buffer_close_icons = false,
       },
-      highlights = require("catppuccin.groups.integrations.bufferline").get({
+      highlights = require("catppuccin.groups.integrations.bufferline").get_theme({
+        style = { "italic", "bold" },
         custom = {
           all = {
             buffer_selected = {
