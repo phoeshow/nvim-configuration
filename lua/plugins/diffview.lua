@@ -3,7 +3,18 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  event = "VeryLazy",
+  keys = {
+    {
+      "<leader>gd",
+      "<cmd>DiffviewOpen<cr>",
+      desc = "Open Diffview",
+    },
+    {
+      "<leader>gh",
+      "<cmd>DiffviewFileHistory %<cr>",
+      desc = "View current file history",
+    },
+  },
   opts = {
     view = {
       merge_tool = {
