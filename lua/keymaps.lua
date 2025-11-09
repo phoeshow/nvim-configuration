@@ -24,8 +24,6 @@ map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down", noremap = true, sil
 map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up", noremap = true, silent = true })
 map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down", noremap = true, silent = true })
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up", noremap = true, silent = true })
-map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down", noremap = true, silent = true })
-map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up", noremap = true, silent = true })
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
