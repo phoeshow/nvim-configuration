@@ -71,8 +71,8 @@ opt.updatetime = 250
 opt.timeoutlen = 300
 
 -- fold
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldenable = false
 
 -- encoding
