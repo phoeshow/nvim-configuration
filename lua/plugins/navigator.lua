@@ -6,7 +6,8 @@ return {
     end)
 
     require("Navigator").setup({
-      mux = ok_kitty and kitty or "auto",
+      -- mux = ok_kitty and kitty or "auto",
+      mux = "auto",
     })
   end,
 }
