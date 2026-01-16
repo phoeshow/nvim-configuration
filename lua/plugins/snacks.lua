@@ -15,6 +15,7 @@ return {
     indent = { enabled = true },
     scroll = { enabled = true },
     picker = { enabled = true },
+    image = {},
     scope = {
       enabled = true,
       keys = {
@@ -134,6 +135,13 @@ return {
         Snacks.picker.grep_word()
       end,
       desc = "Grep current word",
+    },
+    {
+      "<leader>fi",
+      function()
+        Snacks.picker.icons()
+      end,
+      desc = "Find icon",
     },
     {
       "<leader>gl",
