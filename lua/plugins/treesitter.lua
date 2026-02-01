@@ -3,8 +3,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    branch = "main",
-    version = false,
     build = ":TSUpdate",
     opts = {
       indent = { enable = true },

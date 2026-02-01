@@ -19,16 +19,16 @@ return {
 
     local mode_map = {
       -- See :help mode()
-      ["n"] = { icon = "󰄛 ", color = colors.teal },
+      ["n"] = { icon = " ", color = colors.teal },
       ["no"] = { icon = " ", color = colors.sapphire },
       ["nov"] = { icon = " ", color = colors.sapphire },
       ["noV"] = { icon = " ", color = colors.sapphire },
       ["no\22"] = { icon = " ", color = colors.sapphire },
-      ["niI"] = { icon = "󰄛 ", color = colors.teal },
-      ["niR"] = { icon = "󰄛 ", color = colors.teal },
-      ["niV"] = { icon = "󰄛 ", color = colors.teal },
-      ["nt"] = { icon = "󰄛 ", color = colors.teal },
-      ["ntT"] = { icon = "󰄛 ", color = colors.teal },
+      ["niI"] = { icon = " ", color = colors.teal },
+      ["niR"] = { icon = " ", color = colors.teal },
+      ["niV"] = { icon = " ", color = colors.teal },
+      ["nt"] = { icon = " ", color = colors.teal },
+      ["ntT"] = { icon = " ", color = colors.teal },
       ["v"] = { icon = " ", color = colors.mauve },
       ["vs"] = { icon = " ", color = colors.mauve },
       ["V"] = { icon = " LINE", color = colors.pink },
