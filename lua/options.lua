@@ -78,3 +78,24 @@ opt.foldenable = false
 -- encoding
 opt.encoding = "utf-8"
 opt.fileencodings = "ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1"
+
+-- Diagnostic Config
+-- See :help vim.diagnostic.Opts
+vim.diagnostic.config({
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = "single", source = "if_many" },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅚 ",
+      [vim.diagnostic.severity.WARN] = "󰀪 ",
+      [vim.diagnostic.severity.INFO] = "󰋽 ",
+      [vim.diagnostic.severity.HINT] = "󰌶 ",
+    },
+  },
+  virtual_text = true,
+  virtual_lines = false,
+  -- Auto open the float,so you can easily read the errors when jumping with '[d' and ']d'
+  jump = { float = true },
+})

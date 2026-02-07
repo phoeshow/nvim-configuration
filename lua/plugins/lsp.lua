@@ -50,9 +50,6 @@ return {
           map("K", function()
             vim.lsp.buf.hover({ border = "single" })
           end, "LSP: Hover")
-          map("<leader>ce", function()
-            vim.diagnostic.open_float({ border = "single" })
-          end, "Show Diagnostic detail")
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -88,29 +85,6 @@ return {
             vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
           end
         end,
-      })
-
-      -- Diagnostic Config
-      -- See :help vim.diagnostic.Opts
-      vim.diagnostic.config({
-        -- virtual_lines = {
-        --   current_line = true,
-        -- },
-        severity_sort = true,
-        float = { border = "single", source = "if_many" },
-        underline = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-          },
-        },
-        virtual_text = {
-          source = "if_many",
-          spacing = 2,
-        },
       })
 
       local servers = {
