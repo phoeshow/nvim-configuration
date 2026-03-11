@@ -106,7 +106,7 @@ return {
       function()
         Snacks.picker.registers()
       end,
-      "Find Registers",
+      desc = "Find Registers",
     },
     {
       "<leader>bd",
