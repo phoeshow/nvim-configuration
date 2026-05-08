@@ -52,6 +52,7 @@ opt.whichwrap = "<,>,[,]"
 
 -- Sets how neovim display certain whitespace characters in the editor
 opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- [[ UI ]]
 -- Don't show mode, use lualine instead
