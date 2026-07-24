@@ -1,19 +1,19 @@
 return {
   -- `lazydev` configures Lus LSP for your Neovim config, runtime and plugins
   -- used for completion, annotations and signatures of Neovim apis
-  {
-    "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
-      },
-    },
-  },
-  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  -- {
+  --   "folke/lazydev.nvim",
+  --   ft = "lua", -- only load on lua files
+  --   opts = {
+  --     library = {
+  --       -- See the configuration section for more details
+  --       -- Load luvit types when the `vim.uv` word is found
+  --       { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  --       { path = "snacks.nvim", words = { "Snacks" } },
+  --     },
+  --   },
+  -- },
+  -- { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
 
   -- Main LSP config
   {
@@ -79,16 +79,37 @@ return {
               end,
             })
           end
-
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_foldingRange, event.buf) then
-            local win = vim.api.nvim_get_current_win()
-            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-          end
         end,
       })
 
       local servers = {
         lua_ls = {
+          on_init = function(client)
+            client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
+
+            if client.workspace_folders then
+              local path = client.workspace_folders[1].name
+              if path ~= vim.fn.stdpath("config") and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc")) then
+                return
+              end
+            end
+
+            client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+              runtime = {
+                version = "LuaJIT",
+                path = { "lua/?.lua", "lua/?/init.lua" },
+              },
+              workspace = {
+                checkThirdParty = false,
+                -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
+                --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+                library = vim.tbl_extend("force", vim.api.nvim_get_runtime_file("", true), {
+                  "${3rd}/luv/library",
+                  "${3rd}/busted/library",
+                }),
+              },
+            })
+          end,
           settings = {
             Lua = {
               completion = {

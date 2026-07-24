@@ -72,8 +72,6 @@ opt.updatetime = 250
 opt.timeoutlen = 300
 
 -- fold
--- opt.foldmethod = "expr"
--- opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldenable = false
 
 -- encoding
@@ -98,5 +96,13 @@ vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
   -- Auto open the float,so you can easily read the errors when jumping with '[d' and ']d'
-  jump = { float = true },
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        scope = "cursor",
+        focus = false,
+      })
+    end,
+  },
 })
